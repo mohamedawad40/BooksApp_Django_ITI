@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 # Create your views here.
 
 
@@ -56,6 +57,8 @@ def book_details(request,id):
     allproducts=list(filtered_products)
     print(allproducts)
     if len(allproducts)>0:
-        return HttpResponse(allproducts[0])
+#        return HttpResponse(allproducts[0])
+        return HttpResponse(json.dumps( allproducts[0]))
+    
     else:
         return HttpResponse("No Book Found")
