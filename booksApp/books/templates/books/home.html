@@ -1,0 +1,47 @@
+{% extends './layouts/base.html' %}
+{% load static %}
+
+{% block title %} Books Home {% endblock %}
+ 
+{% block content %}
+{% comment %} <h1>All Books</h1> {% endcomment %}
+
+<div class="container">
+    <table class="table table-dark table-striped">
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>No Of Pages</td>
+            <td>Author</td>
+            <td>Price</td>
+            <td>Image</td>
+            <td>Action</td>
+        </tr>
+
+        {% for prd in books %}
+            <tr>
+                <td>{{ prd.id }}</td> 
+                <td>{{ prd.title }}</td> 
+                <td>{{ prd.no_of_pages }}</td> 
+                <td>{{ prd.author }}</td> 
+                <td>{{ prd.price }}</td> 
+               
+                <td><img width="200" height="200" 
+                src ="{% static 'books/images/'|add:prd.image %}" 
+            >
+          
+        </td>
+        <td> <a class="btn btn-info" href="{% url 'book_profile' prd.id %}"> show</td>
+                 
+            </tr>
+
+        {% endfor %}
+    </table>
+{% comment %} 
+    <script src="{% static 'books/js/scripts.js'%}">
+
+    </script> {% endcomment %}
+  
+</div>
+
+{% endblock %}

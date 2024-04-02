@@ -19,7 +19,7 @@ Books=[
     "no_of_pages": 281,
     "author": "Harper Lee",
     "price": 10.99,
-    "image": "to_kill_a_mockingbird.jpg"
+    "image": "Aerie.jpg"
   },
   {
     "id":2,
@@ -27,7 +27,7 @@ Books=[
     "no_of_pages": 328,
     "author": "George Orwell",
     "price": 9.49,
-    "image": "1984.jpg"
+    "image": "catwomen.jpg"
   },
   {
     "id":3,
@@ -35,7 +35,7 @@ Books=[
     "no_of_pages": 180,
     "author": "F. Scott Fitzgerald",
     "price": 7.99,
-    "image": "the_great_gatsby.jpg"
+    "image": "Forest.png"
   },
   {
     "id":4,
@@ -43,7 +43,7 @@ Books=[
     "no_of_pages": 279,
     "author": "Jane Austen",
     "price": 8.79,
-    "image": "pride_and_prejudice.jpg"
+    "image": "Defiant.jpeg"
   }
 ]
 
@@ -62,3 +62,24 @@ def book_details(request,id):
     
     else:
         return HttpResponse("No Book Found")
+    
+def books_home(request):
+    return render(request, "books/home.html" ,
+                  context= {'books':Books},
+                   status=200)
+
+    
+def book_profile(request,id):
+       filtered_products=filter(lambda product : product['id'] == id , Books ) #object
+       allproducts=list(filtered_products)
+       if allproducts:
+           product=allproducts[0]
+           return render(request , './books/details.html' , context={
+               "product":product
+           })
+       
+def contact(request):
+           return render(request , './books/contact.html' ) \
+
+def info(request):
+           return render(request , './books/info.html' )                  

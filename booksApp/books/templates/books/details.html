@@ -1,0 +1,23 @@
+{% extends './layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+   {% comment %} {{product}} {% endcomment %}
+
+   <div class="card" style="width: 18rem;">
+    <img src="{% static 'books/images/'%}{{product.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Id:{{product.id}}</h5>
+      <h5 class="card-title">Title:{{product.title}}</h5>
+      <h5 class="card-title">Author:{{product.author}}</h5>
+      <h5 class="card-title">Author:{{product.no_of_pages}}</h5>
+      <h5 class="card-text">Price {{product.price}}</h5>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+
+  
+
+
+{% endblock %}
