@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
 from django.http import HttpResponse
 import json
 # Create your views here.
 
+from books.models import Product
 
 def hello(request):
     print(request)
@@ -82,4 +83,16 @@ def contact(request):
            return render(request , './books/contact.html' ) \
 
 def info(request):
-           return render(request , './books/info.html' )                  
+           return render(request , './books/info.html' )
+
+
+def products_index(request):
+    products=Product.objects.all()
+    return render(request , 'books/crud/index.html' ,
+                  context={"products" : products})
+
+def product_show(request,id):
+    # product=Product.objects.get(id=id)
+    product=get_object_or_404( Product ,  pk=id)
+    return render(request, 'books/crud/show.html',
+                  context={"product": product})

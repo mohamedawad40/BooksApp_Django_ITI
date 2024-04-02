@@ -1,4 +1,6 @@
-from books.views import (hello , welcome , booklist ,book_details,books_home,book_profile , contact,info)
+from books.views import (hello , welcome , booklist ,book_details,
+                         books_home,book_profile , contact,info,
+                         products_index,product_show)
 from django.urls import path
 
 urlpatterns = [
@@ -7,7 +9,8 @@ urlpatterns = [
     path('home' ,  books_home , name='books-home'),
     path('contact' ,  contact , name='contact'),
     path('info' ,  info , name='info'),
-
-    path('<int:id>' , book_profile , name='book_profile'),
+    path('old/<int:id>' , book_profile , name='book_profile'),
+    path('', products_index, name='products.index'),
+    path('<int:id>', product_show, name='products.show'),
 ]
    
