@@ -7,6 +7,7 @@
  <h1>All Books DB</h1>
 
 <div class="container">
+    <a href="{% url 'products.create' %}" class="btn btn-primary ">Add New Book </a>
     <table class="table table-dark table-striped">
         <tr>
             <td>ID</td>
@@ -15,7 +16,8 @@
             <td>Author</td>
             <td>Price</td>
             <td>Image</td>
-            <td>Action</td>
+            <td>Show</td>
+            <td>Delete</td>
         </tr>
 
         {% for prd in products %}
@@ -33,6 +35,7 @@
         </td>
 <!--        <td> <a class="btn btn-info" href="{% url 'products.show' prd.id %}"> Show</td>-->
         <td> <a class="btn btn-info" href="{{prd.show_url}}"> Show</td>
+        <td> <a class="btn btn-danger" href="{{prd.delete_url}}"> Delete</td>
             </tr>
 
         {% endfor %}

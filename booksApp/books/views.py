@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404 ,redirect, reverse
 from django.http import HttpResponse
 import json
 # Create your views here.
@@ -96,3 +96,31 @@ def product_show(request,id):
     product=get_object_or_404( Product ,  pk=id)
     return render(request, 'books/crud/show.html',
                   context={"product": product})
+
+def product_delete(request, id):
+    product = get_object_or_404(Product, pk=id)
+    product.delete()
+    # return HttpResponse("Product deleted")
+    url = reverse("products.index")
+    return redirect(url)
+
+
+def product_create(request):
+    print(request)
+    if request.method == "POST":
+        print(request.FILES)
+        if request.FILES:
+            image = request.FILES["image"]
+        else:
+            image = None
+        print(request.POST)
+        product = Product(title=request.POST["title"], price=request.POST["price"],
+                          code=request.POST["code"],author=request.POST["author"],
+                          no_of_pages=request.POST["no_of_pages"], image=image)
+        product.save()
+        return redirect(product.show_url)
+        # return HttpResponse("Post request received")
+    # post request
+
+    # get request
+    return  render(request, 'books/crud/create.html')

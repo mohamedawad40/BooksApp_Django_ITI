@@ -1,6 +1,7 @@
 from books.views import (hello , welcome , booklist ,book_details,
                          books_home,book_profile , contact,info,
-                         products_index,product_show)
+                         products_index,product_show , product_delete,
+                         product_create)
 from django.urls import path
 
 urlpatterns = [
@@ -12,5 +13,7 @@ urlpatterns = [
     path('old/<int:id>' , book_profile , name='book_profile'),
     path('', products_index, name='products.index'),
     path('<int:id>', product_show, name='products.show'),
+    path('<int:id>/delete', product_delete, name='products.delete'),
+    path('create', product_create, name='products.create')
 ]
    
