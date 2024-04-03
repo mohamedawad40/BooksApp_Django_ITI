@@ -5,8 +5,9 @@
 {% block content %}
    {% comment %} {{product}} {% endcomment %}
 
-   <div class="card" style="width: 18rem;">
-    <img src="{% static 'books/images/'%}{{product.image}}" class="card-img-top" alt="...">
+   <div class="card mx-auto" style="width: 18rem;">
+<!--    <img src="{% static 'books/images/'%}{{product.image}}" class="card-img-top" alt="...">-->
+        <img src="{{product.image_url}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Id:{{product.id}}</h5>
       <h5 class="card-title">Title:{{product.title}}</h5>

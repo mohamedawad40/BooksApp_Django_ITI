@@ -18,6 +18,8 @@
             <td>Image</td>
             <td>Show</td>
             <td>Delete</td>
+            <td>Update</td>
+
         </tr>
 
         {% for prd in products %}
@@ -27,24 +29,32 @@
                 <td>{{ prd.no_of_pages }}</td> 
                 <td>{{ prd.author }}</td> 
                 <td>{{ prd.price }}</td> 
-               
-                <td><img width="200" height="200" 
-                src ="{% static 'books/images/'|add:prd.image %}" 
-            >
+                <td> <img width="200" height="200" src="{{prd.image_url}}"></td>
+<!--                <td><img width="200" height="200" -->
+<!--                src ="{% static 'books/images/'|add:prd.image %}">-->
           
         </td>
 <!--        <td> <a class="btn btn-info" href="{% url 'products.show' prd.id %}"> Show</td>-->
         <td> <a class="btn btn-info" href="{{prd.show_url}}"> Show</td>
-        <td> <a class="btn btn-danger" href="{{prd.delete_url}}"> Delete</td>
+<!--        <td> <a class="btn btn-danger" href="{{prd.delete_url}}"> Delete</td>-->
+                <td> <a class="btn btn-danger" href="#" onclick="confirmDelete('{{ prd.delete_url }}')"> Delete</td>
+                <td> <a class="btn btn-secondary" href="{{prd.update_url}}"> Update</td>
+<!--                 <td> <a class="btn btn-secondary" href="update/{{prd.id}}"> Update</td>-->
             </tr>
 
         {% endfor %}
     </table>
-{% comment %} 
+{% comment %}
     <script src="{% static 'books/js/scripts.js'%}">
 
     </script> {% endcomment %}
-  
-</div>
 
+</div>
+<script>
+    function confirmDelete(url) {
+        if (confirm("Are you sure you want to delete this product?")) {
+            window.location.href = url;
+        }
+    }
+</script>
 {% endblock %}

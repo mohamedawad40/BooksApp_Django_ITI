@@ -124,3 +124,25 @@ def product_create(request):
 
     # get request
     return  render(request, 'books/crud/create.html')
+
+
+
+
+def product_update(request,id):
+    product = get_object_or_404(Product, pk=id)
+    if request.method == "POST":
+        if request.FILES:
+            image = request.FILES["image"]
+        else:
+            image = product.image
+        product.title = request.POST["title"]
+        product.author = request.POST["author"]
+        product.price = request.POST["price"]
+        product.no_of_pages = request.POST["no_of_pages"]
+        product.image = image
+        product.save()
+        # url = reverse("products.index")
+
+        return redirect(product.show_url)
+
+    return render(request, "books/crud/update.html", context={"product":product})
