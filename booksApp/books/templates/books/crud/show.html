@@ -4,24 +4,66 @@
 
 {% block content %}
    {% comment %} {{product}} {% endcomment %}
+    <style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
 
-   <div class="card mx-auto" style="width: 18rem;">
-<!--    <img src="{% static 'books/images/'%}{{product.image}}" class="card-img-top" alt="...">-->
-        <img src="{{product.image_url}}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Id:{{product.id}}</h5>
-      <h5 class="card-title">Title:{{product.title}}</h5>
-      <h5 class="card-title">Author:{{product.author}}</h5>
-      <h5 class="card-title">Author:{{product.no_of_pages}}</h5>
-      <h5 class="card-text">Price: {{product.price}}</h5>
-      <h5 class="card-text">Code: {{product.code}}</h5>
-      <h5 class="card-text">Created_at: {{product.created_at}}</h5>
-      <h5 class="card-text">Updated_at: {{product.updated_at}}</h5>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .card-img-top {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .card-body {
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+    </style>
+   <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-lg">
+                    <img src="{{ product.image_url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ product.author }}</p>
+                        <p class="card-text"><strong>No. of Pages:</strong> {{ product.no_of_pages }}</p>
+                        <p class="card-text"><strong>Price:</strong> {{ product.price }}</p>
+                        <p class="card-text"><strong>Code:</strong> {{ product.code }}</p>
+                        <p class="card-text"><strong>Created at:</strong> {{ product.created_at }}</p>
+                        <p class="card-text"><strong>Updated at:</strong> {{ product.updated_at }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-  
-
-
 {% endblock %}

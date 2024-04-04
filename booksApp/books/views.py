@@ -80,7 +80,7 @@ def book_profile(request,id):
            })
        
 def contact(request):
-           return render(request , './books/contact.html' ) \
+           return render(request , './books/contact.html' )
 
 def info(request):
            return render(request , './books/info.html' )
@@ -106,7 +106,7 @@ def product_delete(request, id):
 
 
 def product_create(request):
-    print(request)
+    # print(request)
     if request.method == "POST":
         print(request.FILES)
         if request.FILES:
