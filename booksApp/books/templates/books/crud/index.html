@@ -12,7 +12,19 @@
 }
 </style>
 <div class="container">
-    <a href="{% url 'products.create' %}" class="btn btn-primary mb-3" style="margin-left: 1110px;">Add New Book</a>
+   <div class="row">
+    <div class="col">
+        <a href="{% url 'products.create' %}" class="btn btn-primary m-1">Add New Book</a>
+    </div>
+    <div class="col">
+        <a href="{% url 'products.create.forms' %}" class="btn btn-primary m-1">Add New Book via form</a>
+    </div>
+    <div class="col">
+        <a href="{% url 'products.create.modelform' %}" class="btn btn-primary m-1">Add New Book via model form</a>
+    </div>
+</div>
+
+
     <div class="row">
         {% for prd in products %}
         <div class="col-md-3 mb-3">
@@ -26,8 +38,9 @@
                 </div>
                 <div class="card-footer bg-transparent border-0">
                     <a href="{{ prd.show_url }}" class="btn btn-info mr-2">Show</a>
+                    <a href="{{ prd.edit_url }}" class="btn btn-warning">Edit</a>
                     <a href="#" class="btn btn-danger mr-2" onclick="confirmDelete('{{ prd.delete_url }}')">Delete</a>
-                    <a href="{{ prd.update_url }}" class="btn btn-success">Update</a>
+<!--                    <a href="{{ prd.update_url }}" class="btn btn-success">Update</a>-->
                 </div>
             </div>
         </div>

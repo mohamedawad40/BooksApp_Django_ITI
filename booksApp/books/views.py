@@ -1,5 +1,7 @@
 from django.shortcuts import render , get_object_or_404 ,redirect, reverse
 from django.http import HttpResponse
+from books.forms import BookForm ,ProductModelForm
+from categories.models import Category
 import json
 # Create your views here.
 
@@ -146,3 +148,49 @@ def product_update(request,id):
         return redirect(product.show_url)
 
     return render(request, "books/crud/update.html", context={"product":product})
+
+
+def product_create_forms(request):
+    form=BookForm()
+    category = get_object_or_404(Category, pk=1)
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            product = Product(title=form.cleaned_data["title"], price=form.cleaned_data["price"],
+                          code=form.cleaned_data["code"],author=form.cleaned_data["author"],
+                          no_of_pages=form.cleaned_data["no_of_pages"], image=form.cleaned_data['image'],
+                              category=category)
+            product.save()
+            return redirect(product.show_url)
+
+    return render(request,'books/forms/create.html',
+                  context={'form':form})
+
+def product_create_model_forms(request):
+    form = ProductModelForm()
+    if request.method == "POST":
+        form = ProductModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            return redirect(product.show_url)
+
+    return  render(request , 'books/forms/createmodelform.html',
+                   context={'form' :form})
+
+
+def edit_product(request, id):
+    product= Product.get_product_by_id(id)
+    form = ProductModelForm(instance=product)
+    if request.method == "POST":
+        form = ProductModelForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            product = form.save()
+            return redirect(product.show_url)
+
+
+    return render(request, 'books/forms/edit.html',
+              context={"form": form})
+
+
+

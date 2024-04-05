@@ -51,31 +51,28 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card border-0 shadow-lg">
-                    <img src="{{ product.image_url }}" class="card-img-top" alt="...">
+
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text"><strong>Author:</strong> {{ product.author }}</p>
-                        <p class="card-text"><strong>No. of Pages:</strong> {{ product.no_of_pages }}</p>
-                        <p class="card-text"><strong>Price:</strong> {{ product.price }}</p>
-                        <p class="card-text"><strong>Code:</strong> {{ product.code }}</p>
-                        <p class="card-text"><strong>Created at:</strong> {{ product.created_at }}</p>
-                        <p class="card-text"><strong>Updated at:</strong> {{ product.updated_at }}</p>
-                        <p class="card-text"><strong>Category:</strong> {{ product.category }}</p>
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ category.description }}</p>
+
+                        <p class="card-text"><strong>Created at:</strong> {{ category.created_at }}</p>
+                        <p class="card-text"><strong>Updated at:</strong> {{ category.updated_at }}</p>
+
 
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         </div>
-
-       <div class="product-box">
-            <h3>Products in the Same Category:</h3>
-            <div class="product-list">
-                {% for product in product.category.products.all %}
-                    <a href="{{ product.show_url }}">{{ product }}</a><br>
-                {% endfor %}
-            </div>
-        </div>
+<div class="product-box">
+    <h3>Products in this category</h3>
+    <ul class="product-list">
+        {% for prd in category.products.all %}
+            <li><a href="{{ prd.show_url }}">{{ prd }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 
 <style>
     .product-box {
@@ -84,8 +81,8 @@
         padding: 15px;
         margin-top: 25px;
         background-color: lightblue;
-        width:320px;
-        margin:auto
+        width: 320px;
+        margin: auto;
     }
     .product-box h3 {
         color: #333;
@@ -93,9 +90,15 @@
         margin-bottom: 10px;
     }
 
+    .product-list {
+        list-style-type: none; /* Remove bullets from the list */
+        padding: 0;
+        margin: 0;
+    }
+
     .product-list a {
         display: block;
-         font-size: 20px;
+        font-size: 16px;
         color: black;
         text-decoration: none;
         margin-bottom: 5px;
@@ -106,7 +109,4 @@
     }
 </style>
 
-
-
-    </div>
 {% endblock %}

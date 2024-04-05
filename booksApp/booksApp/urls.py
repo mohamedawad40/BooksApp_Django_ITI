@@ -27,6 +27,7 @@ urlpatterns = [
     # path("wlcm/" ,welcome,name="welcomepage"),
     # path("books" , booklist , name= "booklist"),
     # path('prd/<int:id>' ,  book_details , name="product_detail"),
+    path('categories/' , include('categories.urls')),
     path('books/' , include('books.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,5 +1,6 @@
 from django.db import models
-from django.shortcuts import  reverse
+from django.shortcuts import  reverse , get_object_or_404
+from categories.models import Category
 # Create your models here.
 class Product(models.Model):
     title = models.CharField(null=True,max_length=100, blank=True)
@@ -11,7 +12,8 @@ class Product(models.Model):
     code = models.CharField(max_length=100 , unique=True, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
-
+    category=models.ForeignKey(Category , on_delete=models.CASCADE,null=True , blank=True,
+                               related_name="products")
     def __str__(self):
         return f'{self.title}'
 
@@ -34,3 +36,11 @@ class Product(models.Model):
     @property
     def update_url(self):
         return reverse('products.update', args=[self.id])
+
+    @property
+    def edit_url(self):
+        return reverse('products.edit', args=[self.id])
+
+    @classmethod
+    def get_product_by_id(cls, id):
+        return  get_object_or_404(cls, pk=id)
