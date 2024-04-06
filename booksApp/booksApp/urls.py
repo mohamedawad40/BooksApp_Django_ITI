@@ -23,11 +23,9 @@ from django.conf.urls.static import static
 from books.views import hello , welcome , booklist ,book_details
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path("helloo/", hello, name="Hello"),
-    # path("wlcm/" ,welcome,name="welcomepage"),
-    # path("books" , booklist , name= "booklist"),
-    # path('prd/<int:id>' ,  book_details , name="product_detail"),
-    path('categories/' , include('categories.urls')),
-    path('books/' , include('books.urls'))
+    path('categories/', include('categories.urls')),
+    path('books/', include('books.urls')),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('accounts/',include('accounts.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
