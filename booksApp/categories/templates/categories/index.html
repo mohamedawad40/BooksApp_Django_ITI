@@ -3,26 +3,47 @@
 {% block title %} categorys From DB {% endblock %}
 {% block content %}
 <h1> All categories </h1>
-
+<div class="container">
+   <div class="row">
+    <div class="col">
+<!--        <a href="{% url 'products.create' %}" class="btn btn-primary m-1">Add New Book</a>-->
+    </div>
+    <div class="col">
+<!--        <a href="{% url 'products.create.forms' %}" class="btn btn-primary m-1">Add New Book via form</a>-->
+    </div>
+    <div class="col">
+        <a href="{% url 'categories.create' %}" class="btn btn-primary m-1">Add New Category via model form</a>
+    </div>
+</div>
 
 <table class="table">
     <tr>
-        <td> ID</td>
+<!--        <td> ID</td>-->
         <td> Name</td>
         <td> Description</td>
 
         <td> Show</td>
+        <td> Delete</td>
+        <td> Edit</td>
 
     </tr>
     {% for category in categories %}
     <tr>
-        <td>{{category.id }}</td>
+<!--        <td>{{category.id }}</td>-->
         <td> {{category.name}}</td>
         <td> {{category.description}}</td>
 
        <td>
-<!--            <a class="btn btn-info" href="{{category.show_url}}"> Show</a>-->
+            <a class="btn btn-info" href="{{category.show_url}}"> Show</a>
         </td>
+        <td>
+            <a class="btn btn-warning" href="{{category.edit_url}}"> Edit</a>
+        </td>
+
+        <td>
+            <a class="btn btn-danger" href="{{category.delete_url}}"> Delete</a>
+        </td>
+
     </tr>
     {% endfor %}
 

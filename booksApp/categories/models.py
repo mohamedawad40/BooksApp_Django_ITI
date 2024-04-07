@@ -6,6 +6,8 @@ from django.shortcuts import  get_object_or_404, reverse
 class Category(models.Model):
     name=models.CharField(max_length=100,unique=True)
     description=models.CharField(max_length=100,blank=True,null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
 
     def __str__(self):
@@ -26,3 +28,16 @@ class Category(models.Model):
         url = reverse("categories.show", args=[self.id])
         return url
 
+
+    @property
+    def delete_url(self):
+        url = reverse("categories.delete", args=[self.id])
+        return url
+
+    @classmethod
+    def get_category_by_id(cls, id):
+        return get_object_or_404(cls, pk=id)
+
+    @property
+    def edit_url(self):
+        return reverse('categories.edit', args=[self.id])

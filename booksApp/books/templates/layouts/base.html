@@ -30,7 +30,7 @@
         }
 
         .navbar-custom .navbar-nav .nav-link:hover {
-            color: #d4d4d4;
+            color: yellow;
         }
     </style>
 </head>
@@ -45,6 +45,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'products.index' %}">Books Store</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'categories.index' %}">Categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
@@ -69,6 +72,9 @@
                       <li class="nav-item " style="margin-left: 600px" >
                       <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
+                      <li class="nav-item "  >
+                          <a class="nav-link" href="{% url 'account.register' %}">Register</a>
+                      </li>
                       {% endif %}
 
                 </ul>
