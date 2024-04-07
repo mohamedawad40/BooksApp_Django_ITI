@@ -29,15 +29,24 @@ class ProductModelForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data.get('title')
-        if len(title) < 2:
-            raise forms.ValidationError('Title length must be greater than 2 characters')
+        if title is None or len(title) < 3:
+            raise forms.ValidationError('Title must be provided and have a length greater than 3 characters')
         return title
 
     def clean_price(self):
-        price = self.cleaned_data.get('price')
-        if price is None or price <= 0:
-            raise forms.ValidationError('Price must be a positive number')
+        price = self.cleaned_data['price']
+        if price is  None or price < 20:
+            raise forms.ValidationError('Price should be greater than 20$')
         return price
 
+    def clean_no_of_pages(self):
+        pages = self.cleaned_data['no_of_pages']
+        if pages is None :
+            raise forms.ValidationError('Number of pages should be greater than 10')
+        return pages
 
-
+    def clean_author(self):
+        author = self.cleaned_data.get('author')
+        if author is None or len(author) < 3:
+            raise forms.ValidationError('Author must be provided and have a length greater than 3 characters')
+        return author

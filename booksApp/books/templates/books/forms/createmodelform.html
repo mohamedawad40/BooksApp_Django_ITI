@@ -4,6 +4,14 @@
 
 {% block content %}
   <h1>add new product via modelform</h1>
+
+<style>
+    /* CSS for error messages */
+    .errorlist {
+        color: red;
+        font-weight: bold;
+    }
+</style>
 <form method="post"  enctype="multipart/form-data">
     {% csrf_token %}
         {{form }}
