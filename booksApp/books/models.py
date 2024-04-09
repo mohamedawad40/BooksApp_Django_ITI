@@ -44,3 +44,6 @@ class Product(models.Model):
     @classmethod
     def get_product_by_id(cls, id):
         return  get_object_or_404(cls, pk=id)
+
+
+

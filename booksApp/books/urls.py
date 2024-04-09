@@ -2,7 +2,7 @@ from books.views import (hello , welcome , booklist ,book_details,
                          books_home,book_profile , contact,info,
                          products_index,product_show , product_delete,
                          product_create ,product_update ,product_create_forms ,
-                         product_create_model_forms , edit_product)
+                         product_create_model_forms , edit_product,BookSearchView)
 from django.urls import path
 
 urlpatterns = [
@@ -19,7 +19,8 @@ urlpatterns = [
     path('update/<int:id>', product_update, name='products.update'),
     path('forms/create', product_create_forms ,name='products.create.forms'),
     path('forms/createmodel' , product_create_model_forms, name='products.create.modelform'),
-    path('forms/<int:id>/edit', edit_product, name='products.edit')
+    path('forms/<int:id>/edit', edit_product, name='products.edit'),
+    path('search', BookSearchView.as_view(), name='products.search')
 
 ]
    

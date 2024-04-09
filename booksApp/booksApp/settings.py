@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'booksApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'booksapp_DB',
         'USER':"os44",
         "PASSWORD":"iti",

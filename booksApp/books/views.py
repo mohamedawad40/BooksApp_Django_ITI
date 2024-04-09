@@ -2,6 +2,8 @@ from django.shortcuts import render , get_object_or_404 ,redirect, reverse
 from django.http import HttpResponse
 from books.forms import BookForm ,ProductModelForm
 from categories.models import Category
+from django.views import generic
+from django.db.models import Q
 import json
 # Create your views here.
 
@@ -90,8 +92,9 @@ def info(request):
 
 def products_index(request):
     products=Product.objects.all()
+    latest_books = Product.objects.order_by('-created_at')[:4]
     return render(request , 'books/crud/index.html' ,
-                  context={"products" : products})
+                  context={"products" : products,"latest_books":latest_books})
 
 def product_show(request,id):
     # product=Product.objects.get(id=id)
@@ -194,3 +197,16 @@ def edit_product(request, id):
 
 
 
+class BookSearchView(generic.ListView):
+    template_name = 'books/crud/index.html'
+    model = Product
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        search_query = self.request.GET.get('search_query')
+        books = Product.objects.filter(
+            Q(title__icontains=search_query) | Q(author__icontains=search_query)
+        )
+        print(books)
+        self.extra_context = {'search_query': search_query}
+        return books
